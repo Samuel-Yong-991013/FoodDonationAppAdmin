@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "339970916536",
+    "project_id": "food-donation-app-fyp",
+    "storage_bucket": "food-donation-app-fyp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339970916536:android:3478f64de57114b310f44d",
+        "android_client_info": {
+          "package_name": "com.example.fooddonationappadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339970916536-6v1hv3bh6hqh6erj2ts94gbmiuq4s0ua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBETkfsbQN3wyjwXo9_7S4CCgSUMk2YVmo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339970916536-6v1hv3bh6hqh6erj2ts94gbmiuq4s0ua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
