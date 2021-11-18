@@ -38,36 +38,19 @@
             android:id="@+id/emailLogin"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="260dp"
+            android:layout_marginTop="308dp"
             android:ems="10"
             android:hint="@string/login_email"
-            android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/usernameLogin"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="23dp"
-            android:ems="10"
-            android:hint="@string/login_name"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/passwordLogin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailLogin"
-            app:layout_constraintVertical_bias="0.583" />
-
-        <EditText
             android:id="@+id/passwordLogin"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="116dp"
+            android:layout_marginTop="44dp"
             android:ems="10"
             android:hint="@string/login_password"
             android:inputType="textPassword"
