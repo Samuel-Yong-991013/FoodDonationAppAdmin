@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import com.example.fooddonationappadmin.databinding.ActivityLoginBinding
-import com.example.fooddonationappadmin.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -19,13 +21,10 @@ class LoginActivity : AppCompatActivity() {
     val db = Firebase.firestore
     private lateinit var binding: ActivityLoginBinding
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_login)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
         val loginEmail = binding.emailLogin.text.toString()
         val loginName = binding.usernameLogin.text.toString()
@@ -36,20 +35,19 @@ class LoginActivity : AppCompatActivity() {
 
         //Run this function when loginBtn is clicked
         binding.loginBtn.setOnClickListener{
-
-            startActivity(Intent( this@LoginActivity, MainActivity::class.java))
+//            startActivity(Intent( this@LoginActivity, MainActivity::class.java))
 
             //Check if fields are empty
-            if(!TextUtils.isEmpty(loginEmail.trim{ it <= ' '})
-                && !TextUtils.isEmpty(loginName.trim{ it <= ' '})
-                && !TextUtils.isEmpty(loginPassword.trim{ it <= ' '})) {
+            if( !TextUtils.isEmpty(loginEmail)
+                && !TextUtils.isEmpty(loginName)
+                && !TextUtils.isEmpty(loginPassword) ) {
 
                 //Function to check if the email is valid
                 if(!Patterns.EMAIL_ADDRESS.matcher(loginEmail).matches()) {
                     loginUser()
                 }
             }else{
-                Toast.makeText(this, "Please insert all the fields", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@LoginActivity, "Please fill in all the fields", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -66,4 +64,5 @@ class LoginActivity : AppCompatActivity() {
         val password = loginPassword.trim{ it <= ' ' }
 
     }
+
 }
