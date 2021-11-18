@@ -32,6 +32,9 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+
+        //run this line to log out
+        //FirebaseAuth.getInstance().signOut()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
