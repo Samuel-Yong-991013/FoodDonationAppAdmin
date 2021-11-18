@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
-import com.example.fooddonationappadmin.databinding.ActivityMainBinding
 import com.example.fooddonationappadmin.databinding.ActivityRegisterBinding
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult

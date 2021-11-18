@@ -1,5 +1,6 @@
 package com.example.fooddonationappadmin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -18,19 +19,26 @@ class LoginActivity : AppCompatActivity() {
     val db = Firebase.firestore
     private lateinit var binding: ActivityLoginBinding
 
-    private val loginEmail = binding.emailLogin.text.toString()
-    private val loginName = binding.usernameLogin.text.toString()
-    private val loginPassword = binding.passwordLogin.text.toString()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_login)
+
+        val loginEmail = binding.emailLogin.text.toString()
+        val loginName = binding.usernameLogin.text.toString()
+        val loginPassword = binding.passwordLogin.text.toString()
 
         //Initialise Firebase Auth
         auth = Firebase.auth
 
         //Run this function when loginBtn is clicked
         binding.loginBtn.setOnClickListener{
+
+            startActivity(Intent( this@LoginActivity, MainActivity::class.java))
+
             //Check if fields are empty
             if(!TextUtils.isEmpty(loginEmail.trim{ it <= ' '})
                 && !TextUtils.isEmpty(loginName.trim{ it <= ' '})
@@ -48,6 +56,11 @@ class LoginActivity : AppCompatActivity() {
 
     // FUNCTIONS
     private fun loginUser(){
+
+        val loginEmail = binding.emailLogin.text.toString()
+        val loginName = binding.usernameLogin.text.toString()
+        val loginPassword = binding.passwordLogin.text.toString()
+
         val email = loginEmail.trim{ it <= ' ' }
         val username = loginName.trim{ it <= ' ' }
         val password = loginPassword.trim{ it <= ' ' }
