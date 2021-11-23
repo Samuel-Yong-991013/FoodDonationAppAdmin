@@ -22,23 +22,18 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
-//        val loginEmail : String = binding.emailLogin.text.toString()
-//        val loginPassword : String = binding.passwordLogin.text.toString()
-
-        val loginEmail : String = "samuelyong91@gmail.com"
-        val password : String = "123456"
-
-//        val loginEmail = findViewById<EditText>(R.id.emailLogin).text.toString()
-//        val loginPassword = findViewById<EditText>(R.id.passwordLogin).text.toString()
-
         //Run this function when loginBtn is clicked
         binding.loginBtn.setOnClickListener{
+
+            val loginEmail : String = binding.emailLogin.text.toString()
+            val loginPassword : String = binding.passwordLogin.text.toString()
+
             //Check if fields are empty
             if( !TextUtils.isEmpty(binding.emailLogin.text)
                 && !TextUtils.isEmpty(binding.passwordLogin.text) ) {
 
                 //If fields are filled in, attempt to log in the user
-                auth.signInWithEmailAndPassword(loginEmail, password)
+                auth.signInWithEmailAndPassword(loginEmail, loginPassword)
                     .addOnCompleteListener { task ->
                         //Show message that login is successful and move user to MainActivity
                         if (task.isSuccessful) {
