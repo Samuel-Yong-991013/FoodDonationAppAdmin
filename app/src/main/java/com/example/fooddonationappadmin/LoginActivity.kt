@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.databinding.DataBindingUtil
 import com.example.fooddonationappadmin.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -25,8 +26,8 @@ class LoginActivity : AppCompatActivity() {
         //Run this function when loginBtn is clicked
         binding.loginBtn.setOnClickListener{
 
-            val loginEmail : String = binding.emailLogin.text.toString()
-            val loginPassword : String = binding.passwordLogin.text.toString()
+            val loginEmail : String = binding.emailLogin.text.toString().trim()
+            val loginPassword : String = binding.passwordLogin.text.toString().trim()
 
             //Check if fields are empty
             if( !TextUtils.isEmpty(binding.emailLogin.text)
@@ -60,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                             Toast.makeText(
                                 this@LoginActivity,
                                 task.exception!!.message.toString(),
-                                Toast.LENGTH_SHORT
+                                LENGTH_SHORT
                             ).show()
                         }
                     }
