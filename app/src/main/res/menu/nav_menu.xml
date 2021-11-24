@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
 
     <item
         android:id="@+id/nav_home"
-        android:title="Home"/>
+        android:title="Home"
+        android:icon="@drawable/ic_baseline_home_24"/>
     <item
         android:id="@+id/nav_register"
-        android:title="Register new user"/>
+        android:title="Register new user"
+        android:icon="@drawable/ic_baseline_person_add_24"/>
     <item
         android:id="@+id/nav_history"
-        android:title="View transaction history"/>
+        android:title="View transaction history"
+        android:icon="@drawable/ic_baseline_receipt_24"/>
     <item
         android:id="@+id/nav_track"
-        android:title="Track delivery/pickup"/>
+        android:title="Track delivery/pickup"
+        android:icon="@drawable/ic_baseline_directions_car_24"/>
+    <item
+        android:title="Profile">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:title="Logout"
+                android:icon="@drawable/ic_baseline_exit_to_app_24"/>
+        </menu>
+    </item>
 </menu>
