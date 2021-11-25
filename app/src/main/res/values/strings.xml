@@ -20,4 +20,6 @@
     <!--  Register  -->
     <string name="register_btn">Register</string>
     <string name="login_email">Email</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

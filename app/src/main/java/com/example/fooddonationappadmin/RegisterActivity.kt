@@ -32,7 +32,7 @@ class RegisterActivity : AppCompatActivity() {
 
             //Check if register form is empty
             if (!TextUtils.isEmpty(registerEmail) && !TextUtils.isEmpty(registerPassword)) {
-
+                //Check if given email is of a valid format
                 if (Patterns.EMAIL_ADDRESS.matcher(registerEmail).matches()) {
                     //New user will be registered
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(registerEmail, registerPassword)
@@ -61,7 +61,6 @@ class RegisterActivity : AppCompatActivity() {
                                     task.exception!!.message.toString(),
                                     LENGTH_SHORT
                                 ).show()
-
                             }
                         }
                 }else{
