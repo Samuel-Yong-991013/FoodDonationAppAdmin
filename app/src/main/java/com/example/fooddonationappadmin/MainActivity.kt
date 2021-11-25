@@ -48,23 +48,19 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_register -> Toast.makeText(applicationContext, "Fill in the registration form", Toast.LENGTH_SHORT).show()
                 R.id.nav_history -> Toast.makeText(applicationContext, "Checking history...", Toast.LENGTH_SHORT).show()
                 R.id.nav_track -> Toast.makeText(applicationContext, "Tracking...", Toast.LENGTH_SHORT).show()
-                R.id.nav_logout -> Toast.makeText(applicationContext, "Logout successful", Toast.LENGTH_SHORT).show()
+                R.id.nav_logout -> {
+                    Toast.makeText(this@MainActivity, "You have been logged out", Toast.LENGTH_SHORT)
+                    Firebase.auth.signOut()
+                    val intent =
+                        Intent(this@MainActivity, LoginActivity::class.java)
+                    intent.flags =
+                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                }
             }
 
             true
-        }
-
-
-
-        //OnClickListener for user to logout. Sends then back to the login screen
-        binding.logoutBtn.setOnClickListener{
-            Firebase.auth.signOut()
-            val intent =
-                Intent(this@MainActivity, LoginActivity::class.java)
-            intent.flags =
-                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            finish()
         }
     }
 
