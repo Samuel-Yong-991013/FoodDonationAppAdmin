@@ -22,4 +22,5 @@
     <string name="login_email">Email</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="create_user">Please fill in the registration form</string>
 </resources>

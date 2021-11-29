@@ -49,7 +49,7 @@ class RegisterActivity : AppCompatActivity() {
                                 //TEMPORARY SOLUTION
                                 //sends user to Login Activity
                                 val intent =
-                                    Intent(this@RegisterActivity, LoginActivity::class.java)
+                                    Intent(this@RegisterActivity, MainActivity::class.java)
                                 intent.flags =
                                     Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(intent)
@@ -69,6 +69,15 @@ class RegisterActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Please insert all the fields", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        binding.cancelRegisterButton.setOnClickListener{
+            val intent =
+                Intent(this@RegisterActivity, MainActivity::class.java)
+            intent.flags =
+                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
         }
     }
 }

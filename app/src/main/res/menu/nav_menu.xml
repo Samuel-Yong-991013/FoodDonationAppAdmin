@@ -21,6 +21,10 @@
         android:title="Track delivery/pickup"
         android:icon="@drawable/ic_baseline_directions_car_24"/>
     <item
+        android:id="@+id/nav_create_user"
+        android:title="Create User"
+        android:icon="@drawable/ic_baseline_person_add_24"/>
+    <item
         android:title="Profile">
         <menu>
             <item

@@ -48,8 +48,17 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_register -> Toast.makeText(applicationContext, "Fill in the registration form", Toast.LENGTH_SHORT).show()
                 R.id.nav_history -> Toast.makeText(applicationContext, "Checking history...", Toast.LENGTH_SHORT).show()
                 R.id.nav_track -> Toast.makeText(applicationContext, "Tracking...", Toast.LENGTH_SHORT).show()
+                R.id.nav_create_user->{
+                    Toast.makeText(this@MainActivity, "Fill in the registration form", Toast.LENGTH_SHORT)
+                    val intent =
+                        Intent(this@MainActivity, RegisterActivity::class.java)
+                    intent.flags =
+                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                }
                 R.id.nav_logout -> {
-                    Toast.makeText(this@MainActivity, "You have been logged out", Toast.LENGTH_SHORT)
+                    Toast.makeText(this@MainActivity, "You have been logged out", Toast.LENGTH_SHORT).show()
                     Firebase.auth.signOut()
                     val intent =
                         Intent(this@MainActivity, LoginActivity::class.java)
