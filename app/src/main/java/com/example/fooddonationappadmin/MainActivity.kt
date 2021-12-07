@@ -26,11 +26,8 @@ class MainActivity : AppCompatActivity() {
         auth = Firebase.auth
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val userID = intent.getStringExtra("user_id")
-        val emailID = intent.getStringExtra("email_id")
-
-        binding.tvEmailId.text = "Email ID :: $emailID"
-        binding.tvUid.text = "User ID :: $userID"
+        binding.tvEmailId.text = FirebaseAuth.getInstance().currentUser!!.uid
+        binding.tvUid.text = FirebaseAuth.getInstance().currentUser!!.email
 
         //Adding navigation drawer to the Main Activity
         val drawerLayout : DrawerLayout = binding.drawerLayout
@@ -52,10 +49,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, "Fill in the registration form", Toast.LENGTH_SHORT)
                     val intent =
                         Intent(this@MainActivity, RegisterActivity::class.java)
-                    intent.flags =
-                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
-                    finish()
                 }
                 R.id.nav_logout -> {
                     Toast.makeText(this@MainActivity, "You have been logged out", Toast.LENGTH_SHORT).show()
