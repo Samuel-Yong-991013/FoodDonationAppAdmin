@@ -23,11 +23,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val mAuth = FirebaseAuth.getInstance()
         auth = Firebase.auth
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        binding.tvEmailId.text = FirebaseAuth.getInstance().currentUser!!.uid
-        binding.tvUid.text = FirebaseAuth.getInstance().currentUser!!.email
+        binding.tvEmailId.text = mAuth.currentUser!!.uid
+        binding.tvUid.text = mAuth.currentUser!!.email
 
         //Adding navigation drawer to the Main Activity
         val drawerLayout : DrawerLayout = binding.drawerLayout
