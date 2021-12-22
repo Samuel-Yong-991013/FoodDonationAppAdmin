@@ -54,6 +54,7 @@ class RegisterActivity : AppCompatActivity() {
                                 val firebaseUser : FirebaseUser = task.result!!.user!!
 
                                 val newAccount = hashMapOf(
+                                    "email" to registerEmail,
                                     "uID" to firebaseUser.uid,
                                     "role" to "user"
                                 )
