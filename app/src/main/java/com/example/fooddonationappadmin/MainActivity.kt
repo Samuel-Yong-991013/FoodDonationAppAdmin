@@ -18,12 +18,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth;
     private lateinit var binding: ActivityMainBinding
+    private val mAuth = FirebaseAuth.getInstance()
     private lateinit var toggle : ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val mAuth = FirebaseAuth.getInstance()
         auth = Firebase.auth
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 

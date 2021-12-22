@@ -55,8 +55,6 @@ class RegisterActivity : AppCompatActivity() {
 
                                 val newAccount = hashMapOf(
                                     "uID" to firebaseUser.uid,
-                                    "email" to registerEmail,
-                                    "password" to registerPassword,
                                     "role" to "user"
                                 )
 
@@ -89,7 +87,7 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this, "Please insert a valid email address", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "Please insert all the fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
             }
         }
     }
