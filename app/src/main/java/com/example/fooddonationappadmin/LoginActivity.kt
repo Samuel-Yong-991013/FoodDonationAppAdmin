@@ -1,9 +1,11 @@
 package com.example.fooddonationappadmin
 
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.databinding.DataBindingUtil
@@ -19,6 +21,19 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //Check if the user is already signed in reroute to MainActivity, otherwise, login
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            // User is signed in
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        } else {
+            // User is not signed in
+            Log.d(ContentValues.TAG, "onAuthStateChanged:signed_out")
+        }
+
         //Initialise Firebase Auth
         auth = Firebase.auth
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
