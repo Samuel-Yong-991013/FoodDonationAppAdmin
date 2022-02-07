@@ -5,9 +5,7 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import android.widget.ListView
-import android.widget.SimpleAdapter
+import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
@@ -28,14 +26,32 @@ class ViewDonations : AppCompatActivity() {
     private val storage = Firebase.storage
     private val storageRef = storage.reference
 
+    lateinit var filter : Spinner
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_donations)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_donations)
 
-        viewAllDonations()
+        filter = binding.filterViewDonationsSpinner
+        val filterOptions = arrayOf("All", "Ongoing", "Rejected", "Completed")
 
+        filter.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filterOptions)
 
+        filter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                viewAllDonations()
+            }
+
+            override fun onItemSelected( parent: AdapterView<*>?, view: View?, position: Int, id: Long ) {
+                var selectedFilter = filterOptions[position]
+
+                when(selectedFilter){
+                    "All" -> viewAllDonations()
+                }
+            }
+
+        }
     }
 
     private fun viewAllDonations() {
