@@ -28,4 +28,17 @@
     <string name="user_profile_picture">User Profile Picture</string>
     <string name="upload_user_s_profile_picture">Upload user\'s profile picture</string>
     <string name="enter_user_name_here">Enter user name here</string>
+    <string name="users">Users</string>
+    <string name="navHeader_create_user">Create User</string>
+    <string name="view_users">View Users</string>
+    <string name="donations">Donations</string>
+    <string name="view_donations">View Donations</string>
+    <string name="view_ongoing_donations">View Ongoing Donations</string>
+    <string name="requests">Requests</string>
+    <string name="view_requests">View Requests</string>
+    <string name="view_ongoing_requests">View Ongoing Requests</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
+    <string name="details_goes_here">Details goes here</string>
+    <string name="date_goes_here">Date goes here</string>
 </resources>

@@ -14,15 +14,21 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <!-- Main Activities -->
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-
-        <activity android:name=".RegisterActivity"
+        <activity
+            android:name=".RegisterActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ViewDonations"
+            android:exported="false"
             android:parentActivityName=".MainActivity"/>
     </application>
 

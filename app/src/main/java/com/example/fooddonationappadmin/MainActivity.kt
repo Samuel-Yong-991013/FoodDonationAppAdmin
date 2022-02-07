@@ -43,7 +43,9 @@ class MainActivity : AppCompatActivity() {
         navView.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.nav_viewDonations -> {
-
+                    val intent =
+                        Intent(this@MainActivity, ViewDonations::class.java)
+                    startActivity(intent)
                 }
                 R.id.nav_viewRequests -> {
 

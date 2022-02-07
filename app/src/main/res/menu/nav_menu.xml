@@ -5,45 +5,49 @@
     tools:showIn="navigation_view">
 
     <item
-        android:title="Users">
+        android:title="@string/users">
         <menu>
             <item
                 android:id="@+id/nav_create_user"
-                android:title="Create User"
+                android:title="@string/navHeader_create_user"
                 android:icon="@drawable/ic_baseline_person_add_24"/>
+            <item
+                android:id="@+id/nav_viewUsers"
+                android:title="@string/view_users"
+                android:icon="@drawable/ic_baseline_people_24"/>
         </menu>
     </item>
 
     <item
-        android:title="Donations">
+        android:title="@string/donations">
         <menu>
             <item
                 android:id="@+id/nav_viewDonations"
-                android:title="View Donations" />
+                android:title="@string/view_donations" />
             <item
                 android:id="@+id/nav_viewOngoingDonations"
-                android:title="View Ongoing Donations"/>
+                android:title="@string/view_ongoing_donations"/>
         </menu>
     </item>
 
     <item
-        android:title="Requests">
+        android:title="@string/requests">
         <menu>
             <item
                 android:id="@+id/nav_viewRequests"
-                android:title="View Requests" />
+                android:title="@string/view_requests" />
             <item
                 android:id="@+id/nav_viewOngoingRequests"
-                android:title="View Ongoing Requests"/>
+                android:title="@string/view_ongoing_requests"/>
         </menu>
     </item>
 
     <item
-        android:title="Profile">
+        android:title="@string/profile">
         <menu>
             <item
                 android:id="@+id/nav_logout"
-                android:title="Logout"
+                android:title="@string/logout"
                 android:icon="@drawable/ic_baseline_exit_to_app_24"/>
         </menu>
     </item>
