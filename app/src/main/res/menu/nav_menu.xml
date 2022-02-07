@@ -5,25 +5,39 @@
     tools:showIn="navigation_view">
 
     <item
-        android:id="@+id/nav_home"
-        android:title="Home"
-        android:icon="@drawable/ic_baseline_home_24"/>
+        android:title="Users">
+        <menu>
+            <item
+                android:id="@+id/nav_create_user"
+                android:title="Create User"
+                android:icon="@drawable/ic_baseline_person_add_24"/>
+        </menu>
+    </item>
+
     <item
-        android:id="@+id/nav_register"
-        android:title="Register new user"
-        android:icon="@drawable/ic_baseline_person_add_24"/>
+        android:title="Donations">
+        <menu>
+            <item
+                android:id="@+id/nav_viewDonations"
+                android:title="View Donations" />
+            <item
+                android:id="@+id/nav_viewOngoingDonations"
+                android:title="View Ongoing Donations"/>
+        </menu>
+    </item>
+
     <item
-        android:id="@+id/nav_history"
-        android:title="View transaction history"
-        android:icon="@drawable/ic_baseline_receipt_24"/>
-    <item
-        android:id="@+id/nav_track"
-        android:title="Track delivery/pickup"
-        android:icon="@drawable/ic_baseline_directions_car_24"/>
-    <item
-        android:id="@+id/nav_create_user"
-        android:title="Create User"
-        android:icon="@drawable/ic_baseline_person_add_24"/>
+        android:title="Requests">
+        <menu>
+            <item
+                android:id="@+id/nav_viewRequests"
+                android:title="View Requests" />
+            <item
+                android:id="@+id/nav_viewOngoingRequests"
+                android:title="View Ongoing Requests"/>
+        </menu>
+    </item>
+
     <item
         android:title="Profile">
         <menu>

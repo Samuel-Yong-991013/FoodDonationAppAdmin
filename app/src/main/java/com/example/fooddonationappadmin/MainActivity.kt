@@ -42,10 +42,12 @@ class MainActivity : AppCompatActivity() {
 
         navView.setNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.nav_home -> Toast.makeText(applicationContext, "Home", Toast.LENGTH_SHORT).show()
-                R.id.nav_register -> Toast.makeText(applicationContext, "Fill in the registration form", Toast.LENGTH_SHORT).show()
-                R.id.nav_history -> Toast.makeText(applicationContext, "Checking history...", Toast.LENGTH_SHORT).show()
-                R.id.nav_track -> Toast.makeText(applicationContext, "Tracking...", Toast.LENGTH_SHORT).show()
+                R.id.nav_viewDonations -> {
+
+                }
+                R.id.nav_viewRequests -> {
+
+                }
                 R.id.nav_create_user->{
                     Toast.makeText(this@MainActivity, "Fill in the registration form", Toast.LENGTH_SHORT)
                     val intent =
