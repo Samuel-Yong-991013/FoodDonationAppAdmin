@@ -17,9 +17,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Main Activities -->
+        </activity> <!-- Main Activities -->
         <activity
             android:name=".MainActivity"
             android:exported="false" />
@@ -28,6 +26,10 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ViewDonations"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ViewRequests"
             android:exported="false"
             android:parentActivityName=".MainActivity"/>
     </application>
