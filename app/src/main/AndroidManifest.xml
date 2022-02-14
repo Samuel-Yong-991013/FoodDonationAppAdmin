@@ -31,6 +31,10 @@
         <activity
             android:name=".ViewRequests"
             android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ViewUsersActivity"
+            android:exported="false"
             android:parentActivityName=".MainActivity"/>
     </application>
 
