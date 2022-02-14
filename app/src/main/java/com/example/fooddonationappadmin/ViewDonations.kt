@@ -25,7 +25,6 @@ class ViewDonations : AppCompatActivity() {
     var adapter: SimpleAdapter? = null
 
     private val storage = Firebase.storage
-    private val storageRef = storage.reference
 
     lateinit var filter : Spinner
 
@@ -35,7 +34,6 @@ class ViewDonations : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_view_donations)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_donations)
 
         filter = binding.filterViewDonationsSpinner

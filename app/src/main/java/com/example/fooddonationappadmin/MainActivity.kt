@@ -48,7 +48,9 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.nav_viewRequests -> {
-
+                    val intent =
+                        Intent(this@MainActivity, ViewRequests::class.java)
+                    startActivity(intent)
                 }
                 R.id.nav_create_user->{
                     Toast.makeText(this@MainActivity, "Fill in the registration form", Toast.LENGTH_SHORT)
