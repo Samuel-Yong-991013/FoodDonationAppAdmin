@@ -41,4 +41,6 @@
     <string name="logout">Logout</string>
     <string name="details_goes_here">Details goes here</string>
     <string name="date_goes_here">Date goes here</string>
+    <string name="status_goes_here">Status goes here</string>
+    <string name="transactions">Transactions</string>
 </resources>

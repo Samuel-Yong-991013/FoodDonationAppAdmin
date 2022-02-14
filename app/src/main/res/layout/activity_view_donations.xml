@@ -19,7 +19,7 @@
             android:id="@+id/viewDonationsList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/view_donations_list_item"/>
+            tools:listitem="@layout/list_item_view_donations"/>
 
     </LinearLayout>
 </layout>

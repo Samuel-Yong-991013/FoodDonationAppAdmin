@@ -19,28 +19,18 @@
     </item>
 
     <item
-        android:title="@string/donations">
+        android:title="@string/transactions">
         <menu>
             <item
                 android:id="@+id/nav_viewDonations"
                 android:title="@string/view_donations" />
             <item
-                android:id="@+id/nav_viewOngoingDonations"
-                android:title="@string/view_ongoing_donations"/>
+                android:id="@+id/nav_viewRequests"
+                android:title="@string/view_requests" />
         </menu>
     </item>
 
-    <item
-        android:title="@string/requests">
-        <menu>
-            <item
-                android:id="@+id/nav_viewRequests"
-                android:title="@string/view_requests" />
-            <item
-                android:id="@+id/nav_viewOngoingRequests"
-                android:title="@string/view_ongoing_requests"/>
-        </menu>
-    </item>
+
 
     <item
         android:title="@string/profile">

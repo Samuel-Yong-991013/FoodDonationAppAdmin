@@ -10,7 +10,7 @@
         android:layout_marginTop="16dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
             android:orientation="horizontal">
@@ -35,6 +35,13 @@
                     android:textColor="@color/black"
                     android:textSize="26sp"
                     android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/viewDonationsStatusListItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/status_goes_here"
+                    android:textSize="18sp"/>
 
                 <TextView
                     android:id="@+id/viewDonationsDateListItem"
