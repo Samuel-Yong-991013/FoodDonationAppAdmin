@@ -1,9 +1,14 @@
 package com.example.fooddonationappadmin
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.databinding.DataBindingUtil
@@ -12,7 +17,10 @@ import com.example.fooddonationappadmin.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,18 +29,44 @@ class MainActivity : AppCompatActivity() {
     private val mAuth = FirebaseAuth.getInstance()
     private lateinit var toggle : ActionBarDrawerToggle
 
+    private val db = Firebase.firestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         auth = Firebase.auth
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        binding.tvEmailId.text = mAuth.currentUser!!.uid
-        binding.tvUid.text = mAuth.currentUser!!.email
-
         //Adding navigation drawer to the Main Activity
         val drawerLayout : DrawerLayout = binding.drawerLayout
         val navView : NavigationView = binding.navView
+        var headerView: View = navView.getHeaderView(0)
+
+        var navHeaderLayout = headerView.findViewById<LinearLayout>(R.id.navHeaderLayout)
+        var navHeaderUsername = headerView.findViewById<TextView>(R.id.navHeaderUsername)
+        var navHeaderEmail = headerView.findViewById<TextView>(R.id.navHeaderEmail)
+        var navHeaderProfileImage = headerView.findViewById<ImageView>(R.id.navHeaderProfileImage)
+
+        //set user profile information in the nav_header
+        db.collection("users")
+            .whereEqualTo("uID", FirebaseAuth.getInstance().currentUser!!.uid)
+            .get()
+            .addOnSuccessListener { documents ->
+                for(doc in documents){
+                    //retrieve user profile image
+                    val storageRef = FirebaseStorage.getInstance().reference.child(doc["profilePath"].toString())
+                    val localFile = File.createTempFile("tempImage", "jpg")
+                    storageRef.getFile(localFile).addOnSuccessListener {
+
+                        val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
+
+                        navHeaderEmail.text = FirebaseAuth.getInstance().currentUser!!.email
+                        navHeaderUsername.text = doc["userName"].toString()
+                        navHeaderProfileImage.setImageBitmap(bitmap)
+
+                    }
+                }
+            }
 
         toggle = ActionBarDrawerToggle( this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)

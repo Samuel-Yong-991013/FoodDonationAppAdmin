@@ -23,6 +23,19 @@ class ViewRequests : AppCompatActivity() {
 
     val ar: ArrayList<HashMap<String, Any>> = ArrayList()
 
+    private val from = arrayOf(
+        "requestDetails",
+        "requestAddress",
+        "requestStatus",
+        "requestDate"
+    )
+    private val to = intArrayOf(
+        R.id.viewRequestsDetailsListItem,
+        R.id.viewRequestsAddressListItem,
+        R.id.viewRequestsStatusListItem,
+        R.id.viewRequestsDateListItem
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_requests)
@@ -72,19 +85,6 @@ class ViewRequests : AppCompatActivity() {
 
                     lv = binding.viewRequestsList
 
-                    val from = arrayOf(
-                        "requestDetails",
-                        "requestAddress",
-                        "requestStatus",
-                        "requestDate"
-                    )
-                    val to = intArrayOf(
-                        R.id.viewRequestsDetailsListItem,
-                        R.id.viewRequestsAddressListItem,
-                        R.id.viewRequestsStatusListItem,
-                        R.id.viewRequestsDateListItem
-                    )
-
                     //adding items to listview
                     adapter =
                         SimpleAdapter(this, ar, R.layout.list_item_view_requests, from, to)
@@ -116,19 +116,6 @@ class ViewRequests : AppCompatActivity() {
                     adapter!!.notifyDataSetChanged()
 
                     lv = binding.viewRequestsList
-
-                    val from = arrayOf(
-                        "requestDetails",
-                        "requestAddress",
-                        "requestStatus",
-                        "requestDate"
-                    )
-                    val to = intArrayOf(
-                        R.id.viewRequestsDetailsListItem,
-                        R.id.viewRequestsAddressListItem,
-                        R.id.viewRequestsStatusListItem,
-                        R.id.viewRequestsDateListItem
-                    )
 
                     //adding items to listview
                     adapter =
@@ -162,19 +149,6 @@ class ViewRequests : AppCompatActivity() {
 
                     lv = binding.viewRequestsList
 
-                    val from = arrayOf(
-                        "requestDetails",
-                        "requestAddress",
-                        "requestStatus",
-                        "requestDate"
-                    )
-                    val to = intArrayOf(
-                        R.id.viewRequestsDetailsListItem,
-                        R.id.viewRequestsAddressListItem,
-                        R.id.viewRequestsStatusListItem,
-                        R.id.viewRequestsDateListItem
-                    )
-
                     //adding items to listview
                     adapter =
                         SimpleAdapter(this, ar, R.layout.list_item_view_requests, from, to)
@@ -206,19 +180,6 @@ class ViewRequests : AppCompatActivity() {
                     adapter!!.notifyDataSetChanged()
 
                     lv = binding.viewRequestsList
-
-                    val from = arrayOf(
-                        "requestDetails",
-                        "requestAddress",
-                        "requestStatus",
-                        "requestDate"
-                    )
-                    val to = intArrayOf(
-                        R.id.viewRequestsDetailsListItem,
-                        R.id.viewRequestsAddressListItem,
-                        R.id.viewRequestsStatusListItem,
-                        R.id.viewRequestsDateListItem
-                    )
 
                     //adding items to listview
                     adapter =
@@ -252,19 +213,6 @@ class ViewRequests : AppCompatActivity() {
                     adapter!!.notifyDataSetChanged()
 
                     lv = binding.viewRequestsList
-
-                    val from = arrayOf(
-                        "requestDetails",
-                        "requestAddress",
-                        "requestStatus",
-                        "requestDate"
-                    )
-                    val to = intArrayOf(
-                        R.id.viewRequestsDetailsListItem,
-                        R.id.viewRequestsAddressListItem,
-                        R.id.viewRequestsStatusListItem,
-                        R.id.viewRequestsDateListItem
-                    )
 
                     //adding items to listview
                     adapter =
@@ -301,19 +249,6 @@ class ViewRequests : AppCompatActivity() {
                     }
 
                     lv = binding.viewRequestsList
-
-                    val from = arrayOf(
-                        "requestDetails",
-                        "requestAddress",
-                        "requestStatus",
-                        "requestDate"
-                    )
-                    val to = intArrayOf(
-                        R.id.viewRequestsDetailsListItem,
-                        R.id.viewRequestsAddressListItem,
-                        R.id.viewRequestsStatusListItem,
-                        R.id.viewRequestsDateListItem
-                    )
 
                     //adding items to listview
                     adapter =

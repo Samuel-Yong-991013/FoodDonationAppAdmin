@@ -32,12 +32,25 @@ class ViewDonations : AppCompatActivity() {
 
     val ar: ArrayList<HashMap<String,Any>> = ArrayList()
 
+    private val from = arrayOf(
+        "donationImage",
+        "donationDetails",
+        "donationStatus",
+        "donationDate"
+    )
+    private val to = intArrayOf(
+        R.id.viewDonationsImageViewListItem,
+        R.id.viewDonationsDetailsListItem,
+        R.id.viewDonationsStatusListItem,
+        R.id.viewDonationsDateListItem
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_donations)
 
         filter = binding.filterViewDonationsSpinner
-        val filterOptions = arrayOf("All", "Awaiting confirmation", "Awaiting completion", "Rejected", "Completed")
+        val filterOptions = arrayOf("All", "Awaiting confirmation", "Awaiting completion", "Rejected", "Completed", "Canceled")
 
         filter.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filterOptions)
 
@@ -55,10 +68,67 @@ class ViewDonations : AppCompatActivity() {
                     "Awaiting completion" -> viewAwaitingCompletionDonations()
                     "Rejected" -> viewRejectedDonations()
                     "Completed" -> viewCompletedDonations()
+                    "Canceled" -> viewCanceledDonations()
                 }
 
             }
         }
+    }
+
+    private fun viewCanceledDonations() {
+        //clear listview
+        ar.clear()
+
+        db.collection("donations")
+            .whereEqualTo("status", "canceled")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (doc in documents){
+                    //retrieve imageURI to be displayed on ImageView
+                    val storageRef = FirebaseStorage.getInstance().reference.child(doc["donationImagePath"].toString())
+                    val localFile = File.createTempFile("tempImage", "jpg")
+                    storageRef.getFile(localFile).addOnSuccessListener {
+                        val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
+
+                        val hashMap:HashMap<String, Any> = HashMap()
+                        hashMap["donationImage"] = bitmap
+                        hashMap["donationDetails"] = doc["donationDetails"].toString()
+                        hashMap["donationStatus"] = doc["status"].toString()
+                        hashMap["donationDate"] = doc["donationDate"].toString()
+
+                        ar.add(hashMap)
+                        adapter!!.notifyDataSetChanged()
+
+                        lv = binding.viewDonationsList
+
+                        //Adding items to listview
+                        adapter =
+                            SimpleAdapter(this, ar, R.layout.list_item_view_donations, from, to)
+
+                        //add image to listview
+                        adapter!!.viewBinder = object : SimpleAdapter.ViewBinder {
+                            override fun setViewValue(
+                                view: View, data: Any?,
+                                textRepresentation: String?
+                            ): Boolean {
+                                if ((view is ImageView) and (data is Bitmap)) {
+                                    val donationImage = view as ImageView
+                                    val bitmapData = data as Bitmap?
+                                    donationImage.setImageBitmap(bitmapData)
+                                    return true
+                                }
+                                return false
+                            }
+                        }
+
+                        lv!!.adapter = adapter
+                    }
+                }
+            }.addOnFailureListener{ e ->
+                Log.w(TAG, "Error writing document", e)
+            }
+
+        counter += 1
     }
 
     private fun viewRejectedDonations() {
@@ -86,19 +156,6 @@ class ViewDonations : AppCompatActivity() {
                         adapter!!.notifyDataSetChanged()
 
                         lv = binding.viewDonationsList
-
-                        val from = arrayOf(
-                            "donationImage",
-                            "donationDetails",
-                            "donationStatus",
-                            "donationDate"
-                        )
-                        val to = intArrayOf(
-                            R.id.viewDonationsImageViewListItem,
-                            R.id.viewDonationsDetailsListItem,
-                            R.id.viewDonationsStatusListItem,
-                            R.id.viewDonationsDateListItem
-                        )
 
                         //Adding items to listview
                         adapter =
@@ -156,19 +213,6 @@ class ViewDonations : AppCompatActivity() {
 
                         lv = binding.viewDonationsList
 
-                        val from = arrayOf(
-                            "donationImage",
-                            "donationDetails",
-                            "donationStatus",
-                            "donationDate"
-                        )
-                        val to = intArrayOf(
-                            R.id.viewDonationsImageViewListItem,
-                            R.id.viewDonationsDetailsListItem,
-                            R.id.viewDonationsStatusListItem,
-                            R.id.viewDonationsDateListItem
-                        )
-
                         //Adding items to listview
                         adapter =
                             SimpleAdapter(this, ar, R.layout.list_item_view_donations, from, to)
@@ -225,19 +269,6 @@ class ViewDonations : AppCompatActivity() {
 
                         lv = binding.viewDonationsList
 
-                        val from = arrayOf(
-                            "donationImage",
-                            "donationDetails",
-                            "donationStatus",
-                            "donationDate"
-                        )
-                        val to = intArrayOf(
-                            R.id.viewDonationsImageViewListItem,
-                            R.id.viewDonationsDetailsListItem,
-                            R.id.viewDonationsStatusListItem,
-                            R.id.viewDonationsDateListItem
-                        )
-
                         //Adding items to listview
                         adapter =
                             SimpleAdapter(this, ar, R.layout.list_item_view_donations, from, to)
@@ -293,19 +324,6 @@ class ViewDonations : AppCompatActivity() {
                         adapter!!.notifyDataSetChanged()
 
                         lv = binding.viewDonationsList
-
-                        val from = arrayOf(
-                            "donationImage",
-                            "donationDetails",
-                            "donationStatus",
-                            "donationDate"
-                        )
-                        val to = intArrayOf(
-                            R.id.viewDonationsImageViewListItem,
-                            R.id.viewDonationsDetailsListItem,
-                            R.id.viewDonationsStatusListItem,
-                            R.id.viewDonationsDateListItem
-                        )
 
                         //Adding items to listview
                         adapter =
@@ -366,19 +384,6 @@ class ViewDonations : AppCompatActivity() {
                         }
 
                         lv = binding.viewDonationsList
-
-                        val from = arrayOf(
-                            "donationImage",
-                            "donationDetails",
-                            "donationStatus",
-                            "donationDate"
-                        )
-                        val to = intArrayOf(
-                            R.id.viewDonationsImageViewListItem,
-                            R.id.viewDonationsDetailsListItem,
-                            R.id.viewDonationsStatusListItem,
-                            R.id.viewDonationsDateListItem
-                        )
 
                         //Adding items to listview
                         adapter =

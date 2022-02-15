@@ -24,6 +24,7 @@ class ViewUsersActivity : AppCompatActivity() {
     var adapter: SimpleAdapter? = null
 
     private val db = Firebase.firestore
+    private val userAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +34,7 @@ class ViewUsersActivity : AppCompatActivity() {
         val userAuth = FirebaseAuth.getInstance()
 
         db.collection("users")
+            .whereNotEqualTo("uID", userAuth.currentUser!!.uid)
             .get()
             .addOnSuccessListener { documents ->
                 for(doc in documents){
