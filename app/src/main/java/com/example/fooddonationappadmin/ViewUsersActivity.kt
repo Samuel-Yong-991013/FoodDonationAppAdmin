@@ -34,7 +34,6 @@ class ViewUsersActivity : AppCompatActivity() {
         val userAuth = FirebaseAuth.getInstance()
 
         db.collection("users")
-            .whereNotEqualTo("uID", userAuth.currentUser!!.uid)
             .get()
             .addOnSuccessListener { documents ->
                 for(doc in documents){

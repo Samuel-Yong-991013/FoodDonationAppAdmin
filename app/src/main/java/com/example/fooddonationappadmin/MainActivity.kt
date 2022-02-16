@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         var navHeaderProfileImage = headerView.findViewById<ImageView>(R.id.navHeaderProfileImage)
 
         //set user profile information in the nav_header
-        db.collection("users")
+        db.collection("admin")
             .whereEqualTo("uID", FirebaseAuth.getInstance().currentUser!!.uid)
             .get()
             .addOnSuccessListener { documents ->

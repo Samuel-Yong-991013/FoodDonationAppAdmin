@@ -44,7 +44,7 @@
                 android:id="@+id/passwordRegister"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="36dp"
                 android:ems="10"
                 android:hint="@string/login_password"
                 android:inputType="textPassword"
@@ -66,6 +66,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/passwordRegister" />
 
+            <EditText
+                android:id="@+id/userRegisterPhoneNum"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:hint="@string/phone_number"
+                android:inputType="phone"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userNameRegister" />
+
             <ImageView
                 android:id="@+id/userRegisterProfileImageView"
                 android:layout_width="316dp"
@@ -76,15 +89,15 @@
                 android:padding="1dp"
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0.493"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/userNameRegister" />
+                app:layout_constraintTop_toBottomOf="@+id/userRegisterPhoneNum" />
 
             <Button
                 android:id="@+id/uploadUserProfileImageBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="36dp"
                 android:text="@string/upload_user_s_profile_picture"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

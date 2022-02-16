@@ -43,14 +43,15 @@ class RegisterActivity : AppCompatActivity() {
 
             val registerEmail : String = binding.emailRegister.text.toString().trim()
             val registerPassword : String = binding.passwordRegister.text.toString().trim()
+            val registerPhoneNum : String = binding.userRegisterPhoneNum.text.toString().trim()
 
             //Check if register form is empty
-            if (!TextUtils.isEmpty(registerEmail) && !TextUtils.isEmpty(registerPassword)) {
+            if (!TextUtils.isEmpty(registerEmail) && !TextUtils.isEmpty(registerPassword) && !TextUtils.isEmpty(registerPhoneNum)) {
                 //Check if given email is of a valid format
                 if (Patterns.EMAIL_ADDRESS.matcher(registerEmail).matches()) {
                     //Check if userImage have already been selected
                     if(binding.userRegisterProfileImageView.drawable != null){
-                        uploadImage()
+                        createUser()
                     }else{
                         Toast.makeText(this, "Please upload the user's profile image", Toast.LENGTH_SHORT).show()
                     }
@@ -80,11 +81,12 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun uploadImage(){
+    private fun createUser(){
 
         val registerEmail : String = binding.emailRegister.text.toString().trim()
         val registerPassword : String = binding.passwordRegister.text.toString().trim()
         val registerUserName: String = binding.userNameRegister.text.toString().trim()
+        val registerPhoneNum: String = binding.userRegisterPhoneNum.text.toString().trim()
 
         //New user will be registered
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(registerEmail, registerPassword)
@@ -109,6 +111,7 @@ class RegisterActivity : AppCompatActivity() {
                                 "email" to registerEmail,
                                 "uID" to firebaseUser.uid,
                                 "userName" to registerUserName,
+                                "phoneNum" to registerPhoneNum,
                                 "profilePath" to "userImages/$fileName",
                                 "role" to "user"
                             )
@@ -122,6 +125,7 @@ class RegisterActivity : AppCompatActivity() {
                                     Log.w(TAG, "Error adding document", e)
                                 }
 
+                            Toast.makeText(this, "User created successfully", Toast.LENGTH_LONG).show()
                             //sends admin to Home screen
                             val intent =
                                 Intent(this@RegisterActivity, MainActivity::class.java)
