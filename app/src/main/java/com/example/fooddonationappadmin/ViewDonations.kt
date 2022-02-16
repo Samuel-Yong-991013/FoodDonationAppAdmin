@@ -50,7 +50,7 @@ class ViewDonations : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_donations)
 
         filter = binding.filterViewDonationsSpinner
-        val filterOptions = arrayOf("All", "Awaiting confirmation", "Awaiting completion", "Rejected", "Completed", "Canceled")
+        val filterOptions = arrayOf("All", "Awaiting confirmation", "Awaiting completion", "Rejected", "Completed", "Canceled", "Failed")
 
         filter.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filterOptions)
 
@@ -69,10 +69,67 @@ class ViewDonations : AppCompatActivity() {
                     "Rejected" -> viewRejectedDonations()
                     "Completed" -> viewCompletedDonations()
                     "Canceled" -> viewCanceledDonations()
+                    "Failed" -> viewFailedDonations()
                 }
 
             }
         }
+    }
+
+    private fun viewFailedDonations() {
+        //clear listview
+        ar.clear()
+
+        db.collection("donations")
+            .whereEqualTo("status", "failed")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (doc in documents){
+                    //retrieve imageURI to be displayed on ImageView
+                    val storageRef = FirebaseStorage.getInstance().reference.child(doc["donationImagePath"].toString())
+                    val localFile = File.createTempFile("tempImage", "jpg")
+                    storageRef.getFile(localFile).addOnSuccessListener {
+                        val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
+
+                        val hashMap:HashMap<String, Any> = HashMap()
+                        hashMap["donationImage"] = bitmap
+                        hashMap["donationDetails"] = doc["donationDetails"].toString()
+                        hashMap["donationStatus"] = doc["status"].toString()
+                        hashMap["donationDate"] = doc["donationDate"].toString()
+
+                        ar.add(hashMap)
+                        adapter!!.notifyDataSetChanged()
+
+                        lv = binding.viewDonationsList
+
+                        //Adding items to listview
+                        adapter =
+                            SimpleAdapter(this, ar, R.layout.list_item_view_donations, from, to)
+
+                        //add image to listview
+                        adapter!!.viewBinder = object : SimpleAdapter.ViewBinder {
+                            override fun setViewValue(
+                                view: View, data: Any?,
+                                textRepresentation: String?
+                            ): Boolean {
+                                if ((view is ImageView) and (data is Bitmap)) {
+                                    val donationImage = view as ImageView
+                                    val bitmapData = data as Bitmap?
+                                    donationImage.setImageBitmap(bitmapData)
+                                    return true
+                                }
+                                return false
+                            }
+                        }
+
+                        lv!!.adapter = adapter
+                    }
+                }
+            }.addOnFailureListener{ e ->
+                Log.w(TAG, "Error writing document", e)
+            }
+
+        counter += 1
     }
 
     private fun viewCanceledDonations() {
