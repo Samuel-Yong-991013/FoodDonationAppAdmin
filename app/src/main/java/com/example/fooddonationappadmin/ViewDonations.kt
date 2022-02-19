@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.*
 import androidx.databinding.DataBindingUtil
 import com.example.fooddonationappadmin.databinding.ActivityViewDonationsBinding
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -82,6 +83,7 @@ class ViewDonations : AppCompatActivity() {
 
         db.collection("donations")
             .whereEqualTo("status", "failed")
+            .orderBy("donationDate", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 for (doc in documents){
@@ -127,6 +129,7 @@ class ViewDonations : AppCompatActivity() {
                 }
             }.addOnFailureListener{ e ->
                 Log.w(TAG, "Error writing document", e)
+                Toast.makeText(this, "No failed donations", Toast.LENGTH_LONG).show()
             }
 
         counter += 1
@@ -138,6 +141,7 @@ class ViewDonations : AppCompatActivity() {
 
         db.collection("donations")
             .whereEqualTo("status", "canceled")
+            .orderBy("donationDate", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 for (doc in documents){
@@ -183,6 +187,7 @@ class ViewDonations : AppCompatActivity() {
                 }
             }.addOnFailureListener{ e ->
                 Log.w(TAG, "Error writing document", e)
+                Toast.makeText(this, "No canceled donations", Toast.LENGTH_LONG).show()
             }
 
         counter += 1
@@ -194,6 +199,7 @@ class ViewDonations : AppCompatActivity() {
 
         db.collection("donations")
             .whereEqualTo("status", "rejected")
+            .orderBy("donationDate", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 for (doc in documents){
@@ -239,6 +245,7 @@ class ViewDonations : AppCompatActivity() {
                 }
             }.addOnFailureListener{ e ->
                 Log.w(TAG, "Error writing document", e)
+                Toast.makeText(this, "No rejected donations", Toast.LENGTH_LONG).show()
             }
 
         counter += 1
@@ -250,6 +257,7 @@ class ViewDonations : AppCompatActivity() {
 
         db.collection("donations")
             .whereEqualTo("status", "awaiting completion")
+            .orderBy("donationDate", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 for (doc in documents){
@@ -295,6 +303,7 @@ class ViewDonations : AppCompatActivity() {
                 }
             }.addOnFailureListener{ e ->
                 Log.w(TAG, "Error writing document", e)
+                Toast.makeText(this, "No donations awaiting completion", Toast.LENGTH_LONG).show()
             }
 
         counter += 1
@@ -306,6 +315,7 @@ class ViewDonations : AppCompatActivity() {
 
         db.collection("donations")
             .whereEqualTo("status", "completed")
+            .orderBy("donationDate", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 for (doc in documents){
@@ -351,6 +361,7 @@ class ViewDonations : AppCompatActivity() {
                 }
             }.addOnFailureListener{ e ->
                 Log.w(TAG, "Error writing document", e)
+                Toast.makeText(this, "No completed donations", Toast.LENGTH_LONG).show()
             }
 
         counter += 1
@@ -362,6 +373,7 @@ class ViewDonations : AppCompatActivity() {
 
         db.collection("donations")
             .whereEqualTo("status", "awaiting confirmation")
+            .orderBy("donationDate", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 for (doc in documents){
@@ -406,6 +418,7 @@ class ViewDonations : AppCompatActivity() {
                     }
                 }
             }.addOnFailureListener{ e ->
+                Toast.makeText(this, "No donations awaiting confirmation", Toast.LENGTH_LONG).show()
                 Log.w(TAG, "Error writing document", e)
             }
 
@@ -418,6 +431,7 @@ class ViewDonations : AppCompatActivity() {
         }
 
         db.collection("donations")
+            .orderBy("donationDate", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 for (doc in documents) {

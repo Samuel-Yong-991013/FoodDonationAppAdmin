@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
             android:text="@string/food_donation_app"
-            android:textColor="@color/black"
+
             android:textSize="38sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"

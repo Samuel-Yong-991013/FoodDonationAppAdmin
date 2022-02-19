@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.*
 import androidx.databinding.DataBindingUtil
 import com.example.fooddonationappadmin.databinding.ActivityViewRequestsBinding
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -42,7 +43,7 @@ class ViewRequests : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_requests)
 
         filter = binding.filterViewRequestsSpinner
-        val filterOptions = arrayOf("All", "Pending", "Awaiting approval", "Awaiting delivery", "Complete", "Canceled")
+        val filterOptions = arrayOf("All", "Pending", "Awaiting delivery", "Complete", "Canceled")
 
         filter.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filterOptions)
 
@@ -57,7 +58,6 @@ class ViewRequests : AppCompatActivity() {
                 when(selectedFilter){
                     "All" -> viewAllRequests()
                     "Pending" -> viewPendingRequests()
-                    "Awaiting approval" -> viewAwaitingApprovalRequests()
                     "Awaiting delivery" -> viewAwaitingDeliveryRequests()
                     "Complete" -> viewCompleteRequests()
                     "Canceled" -> viewCanceledRequests()
@@ -71,6 +71,7 @@ class ViewRequests : AppCompatActivity() {
 
         db.collection("requests")
             .whereEqualTo("status", "canceled")
+            .orderBy("requestDate", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 for(doc in documents){
@@ -103,6 +104,7 @@ class ViewRequests : AppCompatActivity() {
 
         db.collection("requests")
             .whereEqualTo("status", "completed")
+            .orderBy("requestDate", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 for(doc in documents){
@@ -135,6 +137,7 @@ class ViewRequests : AppCompatActivity() {
 
         db.collection("requests")
             .whereEqualTo("status", "awaiting delivery")
+            .orderBy("requestDate", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 for(doc in documents){
@@ -162,44 +165,12 @@ class ViewRequests : AppCompatActivity() {
         counter += 1
     }
 
-    private fun viewAwaitingApprovalRequests(){
-        ar.clear()
-
-        db.collection("requests")
-            .whereEqualTo("status", "awaiting approval")
-            .get()
-            .addOnSuccessListener { documents ->
-                for(doc in documents){
-                    val hashMap: HashMap<String, Any> = HashMap()
-                    hashMap["requestDetails"] = doc["requestDetails"].toString()
-                    hashMap["requestAddress"] = doc["requestAddress"].toString()
-                    hashMap["requestStatus"] = doc["status"].toString()
-                    hashMap["requestDate"] = doc["requestDate"].toString()
-
-                    ar.add(hashMap)
-                    adapter!!.notifyDataSetChanged()
-
-                    lv = binding.viewRequestsList
-
-                    //adding items to listview
-                    adapter =
-                        SimpleAdapter(this, ar, R.layout.list_item_view_requests, from, to)
-
-                    lv!!.adapter = adapter
-                }
-            }.addOnFailureListener{
-                Toast.makeText(this, "No requests awaiting approval", Toast.LENGTH_SHORT).show()
-            }
-
-        counter += 1
-    }
-
-
     private fun viewPendingRequests() {
         ar.clear()
 
         db.collection("requests")
             .whereEqualTo("status", "pending")
+            .orderBy("requestDate", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 for(doc in documents){
@@ -233,6 +204,7 @@ class ViewRequests : AppCompatActivity() {
         }
 
         db.collection("requests")
+            .orderBy("requestDate", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 for(doc in documents){
