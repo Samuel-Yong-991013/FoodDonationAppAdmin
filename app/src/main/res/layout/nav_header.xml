@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/white"
-    android:layout_marginLeft="10dp">
+    android:background="@color/white">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/navHeaderProfileImage"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
         android:src="@drawable/ic_baseline_people_24"/>
 
     <TextView
@@ -20,16 +20,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/navHeaderUsername"
         android:paddingTop="8dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:hint="Example User"
-
+        android:layout_marginStart="10dp"
         android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/navHeaderEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16dp"
+        android:textSize="16sp"
+        android:layout_marginStart="10dp"
         android:hint="example@gmail.com"/>
 
     <View

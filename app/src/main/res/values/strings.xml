@@ -46,4 +46,16 @@
     <string name="username_goes_here">userName goes here</string>
     <string name="email_goes_here">Email goes here</string>
     <string name="phone_number">Phone Number</string>
+    <string name="request_details">Request details:</string>
+    <string name="address_goes_here">Address goes here</string>
+    <string name="request_address">Request Address:</string>
+    <string name="preferred_delivery_date">Preferred delivery date:</string>
+    <string name="time_goes_here">Time goes here</string>
+    <string name="donation_details">Donation details:</string>
+    <string name="donation_comments">Comments:</string>
+    <string name="comments_goes_here">comments goes here</string>
+    <string name="donation_date">Donation date:</string>
+    <string name="image_goes_here">Image goes here</string>
+    <string name="name_goes_here">Name goes here</string>
+    <string name="recipient_name">Recipient name:</string>
 </resources>

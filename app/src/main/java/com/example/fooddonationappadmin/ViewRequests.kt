@@ -1,6 +1,6 @@
 package com.example.fooddonationappadmin
 
-import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -25,12 +25,16 @@ class ViewRequests : AppCompatActivity() {
     val ar: ArrayList<HashMap<String, Any>> = ArrayList()
 
     private val from = arrayOf(
+        "donationID",
+        "requestID",
         "requestDetails",
         "requestAddress",
         "requestStatus",
         "requestDate"
     )
     private val to = intArrayOf(
+        R.id.hiddenViewRequestsDonationID,
+        R.id.hiddenViewRequestsRequestID,
         R.id.viewRequestsDetailsListItem,
         R.id.viewRequestsAddressListItem,
         R.id.viewRequestsStatusListItem,
@@ -76,6 +80,8 @@ class ViewRequests : AppCompatActivity() {
             .addOnSuccessListener { documents ->
                 for(doc in documents){
                     val hashMap: HashMap<String, Any> = HashMap()
+                    hashMap["donationID"] = doc["donationID"].toString()
+                    hashMap["requestID"] = doc.id
                     hashMap["requestDetails"] = doc["requestDetails"].toString()
                     hashMap["requestAddress"] = doc["requestAddress"].toString()
                     hashMap["requestStatus"] = doc["status"].toString()
@@ -92,8 +98,18 @@ class ViewRequests : AppCompatActivity() {
 
                     lv!!.adapter = adapter
                 }
-            }.addOnFailureListener{
-                Toast.makeText(this, "No requests canceled", Toast.LENGTH_SHORT).show()
+            }
+        //onClickListener for list items
+        lv!!.onItemClickListener =
+            AdapterView.OnItemClickListener { adapterView, view, pos, l ->
+                val selectedItem = adapterView.getItemAtPosition(pos).toString()
+                val itemSplit = selectedItem.split("}", "=", ",", ":").toTypedArray()
+
+                val requestID = itemSplit[5]
+                val donationID = itemSplit[9]
+                val requestStatus = itemSplit[11]
+
+                listViewOnclickListener(requestID, donationID, requestStatus)
             }
 
         counter += 1
@@ -109,6 +125,8 @@ class ViewRequests : AppCompatActivity() {
             .addOnSuccessListener { documents ->
                 for(doc in documents){
                     val hashMap: HashMap<String, Any> = HashMap()
+                    hashMap["donationID"] = doc["donationID"].toString()
+                    hashMap["requestID"] = doc.id
                     hashMap["requestDetails"] = doc["requestDetails"].toString()
                     hashMap["requestAddress"] = doc["requestAddress"].toString()
                     hashMap["requestStatus"] = doc["status"].toString()
@@ -125,8 +143,18 @@ class ViewRequests : AppCompatActivity() {
 
                     lv!!.adapter = adapter
                 }
-            }.addOnFailureListener{
-                Toast.makeText(this, "No requests complete", Toast.LENGTH_SHORT).show()
+            }
+        //onClickListener for list items
+        lv!!.onItemClickListener =
+            AdapterView.OnItemClickListener { adapterView, view, pos, l ->
+                val selectedItem = adapterView.getItemAtPosition(pos).toString()
+                val itemSplit = selectedItem.split("}", "=", ",", ":").toTypedArray()
+
+                val requestID = itemSplit[5]
+                val donationID = itemSplit[9]
+                val requestStatus = itemSplit[11]
+
+                listViewOnclickListener(requestID, donationID, requestStatus)
             }
 
         counter += 1
@@ -142,6 +170,8 @@ class ViewRequests : AppCompatActivity() {
             .addOnSuccessListener { documents ->
                 for(doc in documents){
                     val hashMap: HashMap<String, Any> = HashMap()
+                    hashMap["donationID"] = doc["donationID"].toString()
+                    hashMap["requestID"] = doc.id
                     hashMap["requestDetails"] = doc["requestDetails"].toString()
                     hashMap["requestAddress"] = doc["requestAddress"].toString()
                     hashMap["requestStatus"] = doc["status"].toString()
@@ -158,8 +188,18 @@ class ViewRequests : AppCompatActivity() {
 
                     lv!!.adapter = adapter
                 }
-            }.addOnFailureListener{
-                Toast.makeText(this, "No requests awaiting delivery", Toast.LENGTH_SHORT).show()
+            }
+        //onClickListener for list items
+        lv!!.onItemClickListener =
+            AdapterView.OnItemClickListener { adapterView, view, pos, l ->
+                val selectedItem = adapterView.getItemAtPosition(pos).toString()
+                val itemSplit = selectedItem.split("}", "=", ",", ":").toTypedArray()
+
+                val requestID = itemSplit[5]
+                val donationID = itemSplit[9]
+                val requestStatus = itemSplit[11]
+
+                listViewOnclickListener(requestID, donationID, requestStatus)
             }
 
         counter += 1
@@ -175,6 +215,8 @@ class ViewRequests : AppCompatActivity() {
             .addOnSuccessListener { documents ->
                 for(doc in documents){
                     val hashMap: HashMap<String, Any> = HashMap()
+                    hashMap["donationID"] = doc["donationID"].toString()
+                    hashMap["requestID"] = doc.id
                     hashMap["requestDetails"] = doc["requestDetails"].toString()
                     hashMap["requestAddress"] = doc["requestAddress"].toString()
                     hashMap["requestStatus"] = doc["status"].toString()
@@ -191,8 +233,18 @@ class ViewRequests : AppCompatActivity() {
 
                     lv!!.adapter = adapter
                 }
-            }.addOnFailureListener{
-                Toast.makeText(this, "No pending requests", Toast.LENGTH_SHORT).show()
+            }
+        //onClickListener for list items
+        lv!!.onItemClickListener =
+            AdapterView.OnItemClickListener { adapterView, view, pos, l ->
+                val selectedItem = adapterView.getItemAtPosition(pos).toString()
+                val itemSplit = selectedItem.split("}", "=", ",", ":").toTypedArray()
+
+                val requestID = itemSplit[5]
+                val donationID = itemSplit[9]
+                val requestStatus = itemSplit[11]
+
+                listViewOnclickListener(requestID, donationID, requestStatus)
             }
 
         counter += 1
@@ -207,8 +259,10 @@ class ViewRequests : AppCompatActivity() {
             .orderBy("requestDate", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
-                for(doc in documents){
+                for (doc in documents) {
                     val hashMap: HashMap<String, Any> = HashMap()
+                    hashMap["donationID"] = doc["donationID"].toString()
+                    hashMap["requestID"] = doc.id
                     hashMap["requestDetails"] = doc["requestDetails"].toString()
                     hashMap["requestAddress"] = doc["requestAddress"].toString()
                     hashMap["requestStatus"] = doc["status"].toString()
@@ -216,7 +270,7 @@ class ViewRequests : AppCompatActivity() {
 
                     ar.add(hashMap)
                     //clear ListView
-                    if(counter > 0) {
+                    if (counter > 0) {
                         adapter!!.notifyDataSetChanged()
                     }
 
@@ -228,8 +282,36 @@ class ViewRequests : AppCompatActivity() {
 
                     lv!!.adapter = adapter
                 }
-            }.addOnFailureListener{
-                Toast.makeText(this, "No requests", Toast.LENGTH_SHORT).show()
+                //onClickListener for list items
+                lv!!.onItemClickListener =
+                    AdapterView.OnItemClickListener { adapterView, view, pos, l ->
+                        val selectedItem = adapterView.getItemAtPosition(pos).toString()
+                        val itemSplit = selectedItem.split("}", "=", ",", ":").toTypedArray()
+
+                        val requestID = itemSplit[5]
+                        val donationID = itemSplit[9]
+                        val requestStatus = itemSplit[11]
+
+                        listViewOnclickListener(requestID, donationID, requestStatus)
+                    }
             }
+    }
+
+    private fun listViewOnclickListener(
+        requestID: String,
+        donationID: String,
+        requestStatus: String
+    ) {
+
+        if(requestStatus == "pending" || requestStatus == "canceled"){
+            Toast.makeText(this, "There are no donations related to this request", Toast.LENGTH_LONG).show()
+        }else{
+            val intent =
+                Intent(this@ViewRequests, TransactionInfoActivity::class.java)
+            intent.putExtra("requestID", requestID)
+            intent.putExtra("donationID", donationID)
+            startActivity(intent)
+        }
+
     }
 }

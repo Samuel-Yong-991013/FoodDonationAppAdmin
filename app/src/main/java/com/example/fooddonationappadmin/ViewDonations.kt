@@ -1,7 +1,7 @@
 package com.example.fooddonationappadmin
 
-import android.app.ProgressDialog
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
@@ -25,8 +25,6 @@ class ViewDonations : AppCompatActivity() {
     var lv: ListView? = null
     var adapter: SimpleAdapter? = null
 
-    private val storage = Firebase.storage
-
     lateinit var filter : Spinner
 
     private var counter = 0
@@ -34,12 +32,16 @@ class ViewDonations : AppCompatActivity() {
     val ar: ArrayList<HashMap<String,Any>> = ArrayList()
 
     private val from = arrayOf(
+        "requestID",
+        "donationID",
         "donationImage",
         "donationDetails",
         "donationStatus",
         "donationDate"
     )
     private val to = intArrayOf(
+        R.id.hiddenViewRequestsRequestID,
+        R.id.hiddenViewRequestsDonationID,
         R.id.viewDonationsImageViewListItem,
         R.id.viewDonationsDetailsListItem,
         R.id.viewDonationsStatusListItem,
@@ -94,6 +96,8 @@ class ViewDonations : AppCompatActivity() {
                         val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
 
                         val hashMap:HashMap<String, Any> = HashMap()
+                        hashMap["requestID"] = doc["requestID"].toString()
+                        hashMap["donationID"] = doc.id
                         hashMap["donationImage"] = bitmap
                         hashMap["donationDetails"] = doc["donationDetails"].toString()
                         hashMap["donationStatus"] = doc["status"].toString()
@@ -125,6 +129,16 @@ class ViewDonations : AppCompatActivity() {
                         }
 
                         lv!!.adapter = adapter
+                        lv!!.onItemClickListener =
+                            AdapterView.OnItemClickListener { adapterView, view, pos, l ->
+                                val selectedItem = adapterView.getItemAtPosition(pos).toString()
+                                val itemSplit = selectedItem.split("}", "=", ",", ":").toTypedArray()
+
+                                val requestID = itemSplit[3]
+                                val donationID = itemSplit[7]
+
+                                listViewOnclickListener(requestID, donationID)
+                            }
                     }
                 }
             }.addOnFailureListener{ e ->
@@ -152,6 +166,8 @@ class ViewDonations : AppCompatActivity() {
                         val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
 
                         val hashMap:HashMap<String, Any> = HashMap()
+                        hashMap["requestID"] = doc["requestID"].toString()
+                        hashMap["donationID"] = doc.id
                         hashMap["donationImage"] = bitmap
                         hashMap["donationDetails"] = doc["donationDetails"].toString()
                         hashMap["donationStatus"] = doc["status"].toString()
@@ -183,6 +199,16 @@ class ViewDonations : AppCompatActivity() {
                         }
 
                         lv!!.adapter = adapter
+                        lv!!.onItemClickListener =
+                            AdapterView.OnItemClickListener { adapterView, view, pos, l ->
+                                val selectedItem = adapterView.getItemAtPosition(pos).toString()
+                                val itemSplit = selectedItem.split("}", "=", ",", ":").toTypedArray()
+
+                                val requestID = itemSplit[3]
+                                val donationID = itemSplit[7]
+
+                                listViewOnclickListener(requestID, donationID)
+                            }
                     }
                 }
             }.addOnFailureListener{ e ->
@@ -210,6 +236,8 @@ class ViewDonations : AppCompatActivity() {
                         val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
 
                         val hashMap:HashMap<String, Any> = HashMap()
+                        hashMap["requestID"] = doc["requestID"].toString()
+                        hashMap["donationID"] = doc.id
                         hashMap["donationImage"] = bitmap
                         hashMap["donationDetails"] = doc["donationDetails"].toString()
                         hashMap["donationStatus"] = doc["status"].toString()
@@ -241,6 +269,16 @@ class ViewDonations : AppCompatActivity() {
                         }
 
                         lv!!.adapter = adapter
+                        lv!!.onItemClickListener =
+                            AdapterView.OnItemClickListener { adapterView, view, pos, l ->
+                                val selectedItem = adapterView.getItemAtPosition(pos).toString()
+                                val itemSplit = selectedItem.split("}", "=", ",", ":").toTypedArray()
+
+                                val requestID = itemSplit[3]
+                                val donationID = itemSplit[7]
+
+                                listViewOnclickListener(requestID, donationID)
+                            }
                     }
                 }
             }.addOnFailureListener{ e ->
@@ -268,6 +306,8 @@ class ViewDonations : AppCompatActivity() {
                         val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
 
                         val hashMap:HashMap<String, Any> = HashMap()
+                        hashMap["requestID"] = doc["requestID"].toString()
+                        hashMap["donationID"] = doc.id
                         hashMap["donationImage"] = bitmap
                         hashMap["donationDetails"] = doc["donationDetails"].toString()
                         hashMap["donationStatus"] = doc["status"].toString()
@@ -299,6 +339,16 @@ class ViewDonations : AppCompatActivity() {
                         }
 
                         lv!!.adapter = adapter
+                        lv!!.onItemClickListener =
+                            AdapterView.OnItemClickListener { adapterView, view, pos, l ->
+                                val selectedItem = adapterView.getItemAtPosition(pos).toString()
+                                val itemSplit = selectedItem.split("}", "=", ",", ":").toTypedArray()
+
+                                val requestID = itemSplit[3]
+                                val donationID = itemSplit[7]
+
+                                listViewOnclickListener(requestID, donationID)
+                            }
                     }
                 }
             }.addOnFailureListener{ e ->
@@ -326,6 +376,8 @@ class ViewDonations : AppCompatActivity() {
                         val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
 
                         val hashMap:HashMap<String, Any> = HashMap()
+                        hashMap["requestID"] = doc["requestID"].toString()
+                        hashMap["donationID"] = doc.id
                         hashMap["donationImage"] = bitmap
                         hashMap["donationDetails"] = doc["donationDetails"].toString()
                         hashMap["donationStatus"] = doc["status"].toString()
@@ -357,6 +409,16 @@ class ViewDonations : AppCompatActivity() {
                         }
 
                         lv!!.adapter = adapter
+                        lv!!.onItemClickListener =
+                            AdapterView.OnItemClickListener { adapterView, view, pos, l ->
+                                val selectedItem = adapterView.getItemAtPosition(pos).toString()
+                                val itemSplit = selectedItem.split("}", "=", ",", ":").toTypedArray()
+
+                                val requestID = itemSplit[3]
+                                val donationID = itemSplit[7]
+
+                                listViewOnclickListener(requestID, donationID)
+                            }
                     }
                 }
             }.addOnFailureListener{ e ->
@@ -384,6 +446,8 @@ class ViewDonations : AppCompatActivity() {
                         val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
 
                         val hashMap:HashMap<String, Any> = HashMap()
+                        hashMap["requestID"] = doc["requestID"].toString()
+                        hashMap["donationID"] = doc.id
                         hashMap["donationImage"] = bitmap
                         hashMap["donationDetails"] = doc["donationDetails"].toString()
                         hashMap["donationStatus"] = doc["status"].toString()
@@ -415,6 +479,16 @@ class ViewDonations : AppCompatActivity() {
                         }
 
                         lv!!.adapter = adapter
+                        lv!!.onItemClickListener =
+                            AdapterView.OnItemClickListener { adapterView, view, pos, l ->
+                                val selectedItem = adapterView.getItemAtPosition(pos).toString()
+                                val itemSplit = selectedItem.split("}", "=", ",", ":").toTypedArray()
+
+                                val requestID = itemSplit[3]
+                                val donationID = itemSplit[7]
+
+                                listViewOnclickListener(requestID, donationID)
+                            }
                     }
                 }
             }.addOnFailureListener{ e ->
@@ -443,6 +517,8 @@ class ViewDonations : AppCompatActivity() {
                         val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
 
                         val hashMap: HashMap<String, Any> = HashMap()
+                        hashMap["requestID"] = doc["requestID"].toString()
+                        hashMap["donationID"] = doc.id
                         hashMap["donationImage"] = bitmap
                         hashMap["donationDetails"] = doc["donationDetails"].toString()
                         hashMap["donationStatus"] = doc["status"].toString()
@@ -477,11 +553,31 @@ class ViewDonations : AppCompatActivity() {
                         }
 
                         lv!!.adapter = adapter
+                        //onClickListener for list items
+                        lv!!.onItemClickListener =
+                            AdapterView.OnItemClickListener { adapterView, view, pos, l ->
+                                val selectedItem = adapterView.getItemAtPosition(pos).toString()
+                                val itemSplit = selectedItem.split("}", "=", ",", ":").toTypedArray()
+
+                                val requestID = itemSplit[3]
+                                val donationID = itemSplit[7]
+
+                                listViewOnclickListener(requestID, donationID)
+                            }
                     }
                 }
-            }.addOnFailureListener{ e ->
-                Log.w(TAG, "Error writing document", e)
             }
+    }
+
+    private fun listViewOnclickListener(
+        requestID: String,
+        donationID: String,
+    ) {
+        val intent =
+            Intent(this@ViewDonations, TransactionInfoActivity::class.java)
+        intent.putExtra("requestID", requestID)
+        intent.putExtra("donationID", donationID)
+        startActivity(intent)
     }
 
 }

@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodDonationAppAdmin">
+
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -35,7 +36,11 @@
         <activity
             android:name=".ViewUsersActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".TransactionInfoActivity"
+            android:exported="false"
+            android:parentActivityName=".ViewRequests"/>
     </application>
 
 </manifest>
