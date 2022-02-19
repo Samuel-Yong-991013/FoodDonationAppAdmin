@@ -2,20 +2,23 @@ package com.example.fooddonationappadmin
 
 import android.content.ContentValues
 import android.content.ContentValues.TAG
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.util.Patterns
+import android.widget.EditText
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import com.example.fooddonationappadmin.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import java.lang.Exception
 
 class LoginActivity : AppCompatActivity() {
 
@@ -101,6 +104,38 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this@LoginActivity, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
             }
         }
+
+        binding.forgotPasswordBtn.setOnClickListener{
+            //check if emailET is empty
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Forgot Password")
+            val view = layoutInflater.inflate(R.layout.dialog_forgot_password, null)
+            val userEmail = view.findViewById<EditText>(R.id.userEmailForgotPassword)
+            builder.setView(view)
+            builder.setPositiveButton("Reset", DialogInterface.OnClickListener { dialog, which ->
+                forgotPassword(userEmail)
+            })
+            builder.setNegativeButton("Close", DialogInterface.OnClickListener { _, _ ->  })
+            builder.show()
+        }
+    }
+
+    private fun forgotPassword(userEmail: EditText) {
+        if(userEmail!!.text.toString().isEmpty()){
+            return
+        }
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(userEmail!!.text.toString()).matches()){
+            return
+        }
+
+        Firebase.auth.sendPasswordResetEmail(userEmail!!.text.toString())
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d(TAG, "Email sent.")
+                    Toast.makeText(this, "Check your email for verification", Toast.LENGTH_LONG).show()
+                }
+            }
     }
 
 }
